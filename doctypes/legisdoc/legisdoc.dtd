@@ -1,0 +1,799 @@
+<?xml encoding="utf-8"?>
+<!-- ...................................................................... -->
+<!-- Maryland General Assembly Doctype .................................... -->
+<!-- Copyright (C) 2002, NGA ..............................................
+     All rights reserved. ................................................. -->
+<!-- Copyright (C) 2002, Arbortext, Inc.  All rights reserved. ............ -->
+<!-- ...................................................................... -->
+
+<!-- ****************************************************************************
+	MODIFIED 1/20/04 - MGA - AT THE REQUEST OF ARBORTEXT TO SIMPLY THE DTD
+	ELEMENTS AND ATTRIBUTES ARE ONLY DEFINED IN TRUE CONTEXTS THAT WILL
+	BE USED IN AN LR OR BILL 
+	************************************************************************* -->
+
+<!--
+FILENAME:
+        legisdoc.dtd
+
+VERSION: 2.0
+
+TYPICAL INVOCATION:
+        <!DOCTYPE legisdoc PUBLIC "MGAssembly//DTD Legislative Documents//EN"
+ "legislative.dtd">
+
+PURPOSE:
+        This DTD supports all legislative document structures MGA produces. Templates, 
+        VB shells, ASP.NET pages, and ACL functions will govern the authoring environment.
+
+DEPENDENCIES:
+        none 
+      
+IMPLEMENTED BY:
+        Arbortext Inc.
+        1000 Victors Way
+        Ann Arbor, MI 48108-2700
+        USA
+        Telephone: +1 734 997 0200
+        Fax:       +1 734 997 0201
+        Email:     dtd-team@arbortext.com -->
+
+<!--
+<!ENTITY % ISOnum PUBLIC "ISO 8879:1986//ENTITIES Numeric and Special Graphic//EN">
+<!ENTITY % ISOpub PUBLIC "ISO 8879:1986//ENTITIES Publishing//EN">
+<!ENTITY % ISOtech PUBLIC "ISO 8879:1986//ENTITIES General Technical//EN">
+<!ENTITY % ISOdia PUBLIC "ISO 8879:1986//ENTITIES Diacritical Marks//EN">
+<!ENTITY % ISOlat1 PUBLIC "ISO 8879:1986//ENTITIES Added Latin 1//EN">
+<!ENTITY % ISOlat2 PUBLIC "ISO 8879:1986//ENTITIES Added Latin 2//EN">
+<!ENTITY % ISOamso PUBLIC "ISO 8879:1986//ENTITIES Added Math Symbols:  Ordinary//EN">
+<!ENTITY % ISOgrk1 PUBLIC "ISO 8879:1986//ENTITIES Greek Letters//EN">
+<!ENTITY % ISOgrk3 PUBLIC "ISO 8879:1986//ENTITIES Greek Symbols//EN">
+-->
+
+<!ENTITY % ISOnum  SYSTEM "c:/program files/epic/entities/iso-num.ent">
+<!ENTITY % ISOpub SYSTEM "c:/program files/epic/entities/iso-pub.ent">
+<!ENTITY % ISOtech SYSTEM "c:/program files/epic/entities/iso-tech.ent">
+<!ENTITY % ISOdia SYSTEM "c:/program files/epic/entities/iso-dia.ent">
+<!ENTITY % ISOlat1 SYSTEM "c:/program files/epic/entities/iso-lat1.ent">
+<!ENTITY % ISOlat2 SYSTEM "c:/program files/epic/entities/iso-lat2.ent">
+<!ENTITY % ISOamso SYSTEM "c:/program files/epic/entities/iso-amso.ent">
+<!ENTITY % ISOgrk1 SYSTEM "c:/program files/epic/entities/iso-grk1.ent">
+<!ENTITY % ISOgrk3 SYSTEM "c:/program files/epic/entities/iso-grk3.ent"> 
+
+
+%ISOnum; 
+%ISOpub;
+%ISOtech;
+%ISOdia;
+%ISOlat1;
+%ISOlat2;
+%ISOamso;
+%ISOgrk1;
+%ISOgrk3; 
+
+<!-- DOCTYPE legisdoc [ -->
+<!-- ]> -->
+
+<!ENTITY % clauses "( uncodified-clause | enact-clause | delete-clause | add-clause)*">
+<!ELEMENT add-clause (added-phrase,(uncodified-clause | enact-clause))>
+<!ATTLIST add-clause track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-clause (deleted-phrase, (uncodified-clause | enact-clause | add-clause | delete-clause))>
+<!ATTLIST delete-clause		role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-article (added-phrase, article)>
+<!ATTLIST add-article track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-article (deleted-phrase, (article | add-article | delete-article))>
+<!ATTLIST delete-article	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-purpose-paragraph (added-phrase, purpose-paragraph)>
+<!ATTLIST add-purpose-paragraph track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-purpose-paragraph (deleted-phrase, (purpose-paragraph | add-purpose-paragraph |delete-purpose-paragraph))>
+<!ATTLIST delete-purpose-paragraph	role (strike|bracket | remove | undo) #IMPLIED
+					track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-function-paragraph (added-phrase, function-paragraph)>
+<!ATTLIST add-function-paragraph track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-function-paragraph (deleted-phrase, (function-paragraph | add-function-paragraph | delete-function-paragraph))>
+<!ATTLIST delete-function-paragraph	role (strike|bracket | remove | undo) #IMPLIED
+					track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-sponsor (added-phrase, sponsor)>
+<!ATTLIST add-sponsor track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-sponsor (deleted-phrase, (sponsor | add-sponsor))>
+<!ATTLIST delete-sponsor	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-part (added-phrase, part)>
+<!ATTLIST add-part track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-part (deleted-phrase, (part | add-part | delete-part))>
+<!ATTLIST delete-part	role (strike|bracket | remove | undo) #IMPLIED
+			track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-division (added-phrase, division)>
+<!ATTLIST add-division track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-division (deleted-phrase, (division | add-division | delete-division))>
+<!ATTLIST delete-division	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-title (added-phrase, title)>
+<!ATTLIST add-title track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-title (deleted-phrase, (title | add-title | delete-title))>
+<!ATTLIST delete-title	role (strike|bracket | remove | undo) #IMPLIED 
+			track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-subtitle (added-phrase, subtitle)>
+<!ATTLIST add-subtitle track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-subtitle (deleted-phrase, (subtitle | add-subtitle | delete-subtitle))>
+<!ATTLIST delete-subtitle 	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-chapter (added-phrase, chapter)>
+<!ATTLIST add-chapter track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-chapter (deleted-phrase, (chapter | add-chapter | delete-chapter))>
+<!ATTLIST delete-chapter	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-section (added-phrase, section)>
+<!ATTLIST add-section track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-section (deleted-phrase, (section | add-section | delete-section))>
+<!ATTLIST delete-section	role (strike|bracket | remove | undo) #IMPLIED	
+			 	track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-subsection (added-phrase, subsection)>
+<!ATTLIST add-subsection track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT delete-subsection (deleted-phrase, (add-subsection | subsection | delete-subsection))>
+<!ATTLIST delete-subsection	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-paragraph (added-phrase, paragraph)>
+<!ATTLIST add-paragraph contingency (yes | no) #IMPLIED
+			changed (changed | not-changed)	#IMPLIED
+			role (item | none) #IMPLIED
+			track-changes (yes | no) #IMPLIED>
+			
+<!ELEMENT delete-paragraph (deleted-phrase, (paragraph | add-paragraph | delete-paragraph))>
+<!ATTLIST delete-paragraph	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-subparagraph (added-phrase, subparagraph)>
+<!ATTLIST add-subparagraph  contingency (yes | no) #IMPLIED
+				changed (changed | not-changed)	#IMPLIED
+				role (item | none) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+			
+<!ELEMENT delete-subparagraph (deleted-phrase, (subparagraph | add-subparagraph | delete-subparagraph))>
+<!ATTLIST delete-subparagraph	role (strike|bracket | remove | undo) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-sub-subparagraph (added-phrase, sub-subparagraph)>
+<!ATTLIST add-sub-subparagraph 	contingency (yes | no) #IMPLIED
+				changed (changed | not-changed)	#IMPLIED
+				role (item | none) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+			
+<!ELEMENT delete-sub-subparagraph (deleted-phrase, (sub-subparagraph | add-sub-subparagraph | delete-sub-subparagraph))>
+<!ATTLIST delete-sub-subparagraph	role (strike|bracket | remove | undo) #IMPLIED
+					track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT add-sub-sub-subparagraph (added-phrase, sub-sub-subparagraph)>
+<!ATTLIST add-sub-sub-subparagraph  contingency (yes | no) #IMPLIED
+					changed (changed | not-changed)	#IMPLIED
+					role (item | none) #IMPLIED
+					track-changes (yes | no) #IMPLIED>
+			
+<!ELEMENT delete-sub-sub-subparagraph (deleted-phrase, (add-sub-sub-subparagraph | sub-sub-subparagraph | delete-sub-sub-subparagraph))>
+<!ATTLIST delete-sub-sub-subparagraph	role (strike|bracket | remove | undo) #IMPLIED
+					track-changes (yes | no) #IMPLIED>
+
+<!ENTITY % main-heading "(main-head | subheading1 |  subheading2)">
+
+<!ENTITY % legis-structures "(chapter | add-chapter | delete-chapter | division | add-division | delete-division | add-subsection | delete-subsection | subsection | paragraph | subparagraph |sub-subparagraph |sub-sub-subparagraph | part | add-part | delete-part | add-section | section |delete-section | title | add-title | subtitle | add-subtitle | delete-subtitle )">
+
+<!ENTITY % bill-core "(long-title, (%clauses;)+)">
+
+<!ENTITY % body "((%bill-core;)?, (add-article | delete-article | article)*)">
+
+<!-- ******************************  structural components ****************************  -->
+
+<!ENTITY % start-of-structure "(subheading1*, enum?, caption?)">
+<!ENTITY % end-of-structure "((subheading1 | text | note)*)">
+
+<!-- *****MGA  Removed () and the plus sign, moving plus sign to where entity was referenced ***** -->
+<!ENTITY % within-section-level-model " add-subsection | delete-subsection | subsection">
+                                           
+<!ENTITY % section-model "(%start-of-structure;, (%within-section-level-model; | table | %end-of-structure; )*)">
+
+<!-- *****MGA  Wrapped 'within-section-level-model' with parens and plus sign ***** -->
+<!ENTITY % enact-clause-model "( %start-of-structure;, %end-of-structure;, (article | chapter | section | table | add-article | delete-article | add-chapter | delete-chapter | add-section | delete-section)*) ">
+
+<!ENTITY % date-attributes "date  CDATA  #IMPLIED
+			numeric  CDATA #IMPLIED
+			alphabetic NMTOKENS #IMPLIED
+   		legis-day CDATA  #IMPLIED">
+<!-- ACL function will read all strings entered in a date field, and will write two values:  one to numeric and one to alphabetic.  This is a pass-through for the FOSI.  Numeric holds mm/dd/yyyy, with no leading zeros in the month or day fields.  The alphabetic uses abbreviated months with a space followed by the day (numeric) a comma, space, and the year as four-character numeric field -->
+
+<!-- *****MGA  Removed () ***** -->
+<!ENTITY % partial-revisions " added-phrase | deleted-phrase | comment | emphasis ">
+
+<!-- *****MGA  Removed () and the asterisk ***** -->
+<!ENTITY % text-model "%partial-revisions; | external-xref | citation | fill">
+
+<!-- MGA Added text as an available option 7/25/2011 EDWP -->
+<!ENTITY % subsection-model "( %start-of-structure;, %end-of-structure;, (table | add-paragraph | delete-paragraph | paragraph | text)*)">
+  
+<!ENTITY % yesorno "(0 | 1)">
+
+<!ENTITY % titles "ttitle* , tdesc*">
+
+<!-- *************************** Table constructs  *********************************  -->
+
+<!ELEMENT ttitle (#PCDATA)>
+
+<!ELEMENT tdesc (#PCDATA)>
+
+<!ENTITY % tbl.table.att " pgwide        (0 | 1 )  #IMPLIED
+   line-rules    (no-gen | 
+                  hor | 
+                  hor-ver | 
+                  hor-sides | 
+                  all-gen | 
+                  hor-trimside | 
+                  hor-ver-trimside )  #REQUIRED
+   rule-weights NMTOKEN  #IMPLIED">
+
+<!ENTITY % tbl.tgroup.att " bearoff              CDATA    #IMPLIED
+   min-space             (0 | 1 )  #IMPLIED
+   no-carding            (0 | 1 )  #IMPLIED
+   no-hyph               (0 | 1 )  #IMPLIED
+   ldr-align-top         (0 | 1 )  #IMPLIED
+   ttitle-size          CDATA    #IMPLIED
+   thead-tbody-ldg-size NMTOKEN  #IMPLIED
+   fnote-size           CDATA    #IMPLIED
+   grid-typeface        NMTOKEN  #IMPLIED
+   actual-width         NMTOKEN  #IMPLIED
+   block-style           (0 | 1 )  #IMPLIED
+   offset-from-left     CDATA    #IMPLIED
+   restrict-indent       (0 | 1 )  #IMPLIED">
+
+<!ENTITY % tbl.colspec.att " coldef                 (trace | 
+                           fig | 
+                           txt | 
+                           txt-no-ldr | 
+                           txt-no-spread | 
+                           txt-no-ldr-no-spread | 
+                           align-on-char )  #REQUIRED
+   min-data-value        NMTOKEN  #REQUIRED
+   colsep-modify          (parallel | bold )  #IMPLIED
+   align-modify-variable  (0 | 1 )  #IMPLIED">
+
+<!ENTITY % tbl.row.att " rowsep-modify  (double | bold )  #IMPLIED">
+
+<!ENTITY % tbl.entry.att " rowsep-modify    (double | bold )  #IMPLIED
+   stub-definition  (trace | 
+                     fig | 
+                     txt-clr | 
+                     txt-ldr | 
+                     txt-clr-start-end | 
+                     txt-clr-2pts-larger | 
+                     txt-ldr-start | 
+                     txt-ldr-end | 
+                     ctr-start | 
+                     ctr-start-end | 
+                     ctr-continues-start | 
+                     ctr-on-table-start | 
+                     table-fnote | 
+                     fnote-bottom-page )  #IMPLIED
+   stub-hierarchy  CDATA  #IMPLIED
+   entry-modify     (force-ldr | 
+                     force-ldr-bottom | 
+                     ctr-variable | 
+                     paragraph | 
+                     fl-hang-hier-2 | 
+                     fl-hang-hier-3 | 
+                     fl-hang-hier-4 | 
+                     fl-hang-hier-5 | 
+                     fl-hang-hier-6 | 
+                     fl-hang-hier-7 | 
+                     fl-hang-hier-8 | 
+                     fl-hang-hier-9 )  #IMPLIED">
+
+
+<!ENTITY % yesorno "NMTOKEN">
+
+<!-- no if zero(s), yes if any other value -->
+
+<!ENTITY % titles "title?">
+
+<!-- ************************  default for use in entry content*********************** -->
+
+<!ENTITY % tbl.table.name "table">
+
+<!ENTITY % tbl.table-titles.mdl "%titles;">
+
+<!ENTITY % tbl.table-main.mdl "tgroup+">
+
+<!ENTITY % tbl.table.mdl "%tbl.table-titles.mdl;, %tbl.table-main.mdl;">
+
+<!ENTITY % tbl.table.att "
+    pgwide      %yesorno;  #IMPLIED ">
+
+<!ENTITY % bodyatt "">
+
+<!ENTITY % tbl.tgroup.mdl "colspec* , thead? , tbody">
+
+<!ENTITY % tbl.tgroup.att "">
+
+<!ENTITY % tbl.thead.att "">
+
+<!ENTITY % tbl.tbody.att "">
+
+<!ENTITY % tbl.colspec.att "">
+
+<!ENTITY % tbl.row.mdl "(entry+ | %partial-revisions;)*">
+
+<!ENTITY % tbl.row.att "">
+
+<!-- *****MGA  Removed () ***** -->
+<!ENTITY % tbl.entry.mdl "(#PCDATA | fill | %partial-revisions; | citation | note | mga_newline)*">
+
+<!ENTITY % tbl.entry.att "">
+
+<!--  ******************************** Start Doctype ************************************ -->
+
+<!ELEMENT legisdoc (metadata, doc-type?, byline?, %body;)>
+
+<!ATTLIST legisdoc  	xmlns:xlink  	CDATA  #FIXED 'http://www.w3.org/1999/xlink'
+			doc-id          NMTOKENS #REQUIRED
+                  	doc-version     CDATA #IMPLIED
+                        public-private  (public | private) 'private'
+			doc-state	CDATA  #IMPLIED
+			print-smallcaps	(yes | no)	'no'>
+                  
+<!ELEMENT main-head (#PCDATA)>
+
+<!ELEMENT subheading1 (#PCDATA | text)*>
+<!ATTLIST subheading1 seqID CDATA  #IMPLIED>		
+
+<!ELEMENT subheading2 (#PCDATA)>
+<!ATTLIST subheading2 seqID CDATA  #IMPLIED>
+
+<!--  **************************  Header and Footer information *************************** 
+
+The footer holds boiler plate information based on what stage, state, and what actions have happened with the bill. Phrase for the use of brackets, capitals, for strikes and underscore  (see below, insertion of strikes and brackets)
+
+
+LINE NUMBERS they provide bill text with or without bill text for ease of searching they are removed. 
+
+HEADING for LRs: 
+Element or attribute data from the following (LR):  filecode, prior-year(date), crossfile(PCDATA = LR#, associated-doc role = LR (#=ID), request-date, committee (appoint para, name, state, stage), drafter, operator, proofer (authorinfo), LDM stored, (levels of reader, reviewer, drafter, reviewer), sponsorLine.
+
+HEADING for LRs (first-read): filecode, prior-year, crossfiled LR, LR#, bill#, request-date (date), prefiled, sponsorLine, introdate (introduced-date), committee* (appoint para, name, state, stage), corr-print-line  (sponsor line for tird-reader bill:  gentext= By):
+
+
+HEADING for LRs (third-read): filecode, prior-year, crossfiled LR, LR#, bill#, request-date), prefiled, sponsorLine, introduced-date, committee*,(appoint para, name, state, stage)   (action, status), chamber-action,(doc-state) second-read-date, corr-print-line  (sponsor line for third-reader bill:  gentext= By):
+
+HEADING for bills (enrolled):  filecode, prior-year, crossfiled LR, LR#, bill#, request-date, prefiled, sponsorLine, introduced-date, committee*, approval, corr-print-line  Read second time  (sponsor line for enrolled bill:  gentext= Introduced by):(concatenate all committee names on one line) 
+
+HEADING chapters:  chapter #, Bill # (like 2 titles).  Footer gets instructions as well as date approved by the Governor " Approved (date) goes on last page of chapter. 
+
+ created entity main-heading to hold "PRE-FILED and ENROLLED BILL" before the heading, on enrolled, it falls just after main title; on pre-filed, it goes above the By: (sponsor line)  -->
+
+<!-- INSERTION OF BRACKETS AND STRIKES.  
+
+Drafters LR and First Read versions.  If additions are made to the purpose paragraph, short title or function paragraph, they are in upper and lower case.  Existing statute additions are all upper case.  Deletions use brackets to indicate text they want removed from the statute.  At first read, the objects marked for deletion are hidden.  Additions (to non-statute text) are not rendered differently than existing text.
+
+3rd Reader version.  Bracketed text means a change was initiated at the LR state.  all CAPS means something was added to original statute text at LR state.  At 3rd reader, new text is underscored.  If new text is inserted in the statute data, it is all caps and underlined.  Changes to purpose paragraph and/or long title are just underscored.  
+
+3rd reader deletions.  Can delete anything at any level [ ] and underscore means delete at 3rd reader.  Strike means to undo a delete. Italic and underscore means something was added by the opposite chamber    -->
+
+<!ELEMENT uncodified-clause  (caption?, (subheading1 | text)*, (subsection | add-subsection | delete-subsection |paragraph | add-paragraph | delete-paragraph | table)*)>
+
+<!-- *****MGA  Changed the ending '+' to an '*' ***** -->
+<!ELEMENT metadata (doc-state, (associated-doc | doc-class-id | doc-number | request-date | %main-heading; | committee-name | session |action | filecode | authorinfo)*)>
+
+<!ELEMENT date EMPTY>
+<!ATTLIST date  %date-attributes;>
+<!ELEMENT request-date (date)>
+
+<!ELEMENT fill EMPTY>
+<!ATTLIST fill character (period | space | underscore | en_dash | em_dash | dash) 'period'>
+<!-- the fill element is used as a trigger for the FOSI to display a series of characters  betwen the element's position and the margin.  The attribute value indicates the character to be used. -->
+
+<!ELEMENT doc-number (#PCDATA)>
+
+<!ELEMENT caption (#PCDATA | %partial-revisions; | mga_newline )*>
+<!ATTLIST caption context (bill | amendment | bond | resolution | jointRes) #IMPLIED
+				state (changed | unchanged) 'unchanged'>
+				
+<!-- 7/6/05 - Added external-xref back in for links in PDF creation -->
+<!ELEMENT external-xref (#PCDATA)*>
+<!ATTLIST external-xref  xlink:type CDATA #FIXED 'simple'
+			 xlink:href CDATA #IMPLIED>
+
+<!-- the attributes on caption are used principally when the caption element is used in the context of the analogous model. -->
+
+<!ELEMENT deflist (text*, (term, definition)+)>
+<!-- the definition list appears minimally in code revisions explaining the contextual use of words or phrases for the code being addressed -->
+
+<!ELEMENT term (text)>
+
+<!ELEMENT definition (text)>
+
+<!ELEMENT doc-type (text)> 
+<!ATTLIST doc-type role (EmergencyBill | ConstitutionalAmend) #IMPLIED>
+                
+<!ELEMENT doc-class-id (#PCDATA)>
+<!ATTLIST doc-class-id class (lr-bill | amendment | unofficial-reprint) 'lr-bill'
+                       type (CodeRevisionEconomicDevelopment | CodeRevisionLocalGovernment | CodeRevisionHumanRelations | CodeRevisionLegalOfficials |
+                             CodeRevisionWSSC | HouseBill | SenateBill | HouseBillUncodified | SenateBillUncodified |
+                             HouseJointResolution | SenateJointResolution | SenateSimpleResolution | HouseSimpleResolution | 
+                             HouseBondEqual | HouseBondNo | HouseBondPartial | SenateBondEqual | SenateBondNo | SenateBondPartial |
+                             HouseBudgetOperating | HouseBudgetCapital | SenateBudgetOperating | SenateBudgetCapital |
+                             HouseCorrective | SenateCorrective) #IMPLIED
+                       special-state (e | c) #IMPLIED
+		       bill-file-type (prefiled | regular | lateintro) 'regular'
+		       legis-type (house | senate) 'house'>
+
+
+<!ELEMENT authorinfo (name | date)*>
+<!ATTLIST authorinfo type (reviewer|drafter|operator|proofreader | checker) 'drafter'>
+<!-- if authorinfo type = operator, date = LDM store date, LDM stored = yes 
+if authorinfo type = proofreader or checker, LDM stored = yes, but the date represents the date of proof or check -->
+
+<!-- 
+   7/11/03 Michelle added the session attribute with a default value of 1 
+   This attribute is to be used if users want to be able to track changes they make per working session
+-->
+<!-- 
+   11/20/03 Michelle added an option for the state attribute.  Now it may be set to none if 
+   the document is not a bill draft.
+-->
+<!ELEMENT doc-state (#PCDATA | date | %partial-revisions;)*>
+<!ATTLIST doc-state state (lr|first|third|enrolled|chapter|none) 'lr'
+		    current-authorinfo-type (reviewer|drafter|operator|proofreader | checker) 'drafter'
+		    session CDATA "1"
+		    print-class (original | corrective | committee-reprint) 'original'
+		    print-value (first | second | third | fourth) 'first'>
+			
+			
+<!--  gentext:  if doc-state = first, print-class=original, and print-value=first, then nothing gets printed
+    if print-class = corrective use print-value as second, third, or fourth printing line.  There could be times when you may have to print a document for reasons other than a correction, and you may also have corrections that go unprinted until a later iteration -->
+
+<!--  **************************** committee-related stuff *****************************  -->
+<!ELEMENT committee-name (#PCDATA | %partial-revisions;)*>
+<!ATTLIST committee-name committee-id   
+          	(committee-primary-house|  	 
+			committee-primary-senate| 	 
+			committee-secondary-house|    
+		committee-secondary-senate) #IMPLIED>
+
+<!ELEMENT byline (text | sponsor | add-sponsor | delete-sponsor)*>
+   
+<!ELEMENT sponsor (contact-info)*>
+<!ATTLIST sponsor class (primary1|primary2 | co-sponsor) #IMPLIED
+			chamber (house | senate | joint)	#REQUIRED
+			category CDATA  #REQUIRED
+			sponsor-id CDATA #REQUIRED
+			district CDATA	  #IMPLIED
+			on-behalf-of (yes | no) 'no'>
+
+<!ELEMENT associated-doc (text?)>
+<!ATTLIST associated-doc xlink:type CDATA #FIXED 'simple'
+			xlink:href CDATA #IMPLIED  	
+			role (amendment | 
+				associated-bill | 
+				associated-joint-resolution | 
+				associated-simple-resolution |
+				lr |
+				chapter | 
+				report | 
+				other |
+				prior-year |
+				crossfile) #IMPLIED	
+			bill-lr-number CDATA #IMPLIED
+			committee  CDATA #IMPLIED
+			year CDATA #IMPLIED
+			reference-number CDATA #IMPLIED>
+
+<!ELEMENT article ((caption | subheading1)*, (division | add-division | delete-division | title | add-title | delete-title | subtitle | add-subtitle | delete-subtitle | part | add-part | delete-part | section | add-section | delete-section)*)>
+<!ATTLIST article 	id  NMTOKENS #IMPLIED
+           		changed   (changed | not-changed)  'not-changed'
+           		contingency (yes | no) #IMPLIED
+			old-id  NMTOKENS #IMPLIED
+			protected (yes | no | done) 'yes'>
+
+<!-- note was inserted into the DTD to hold notes that are sometimes placed into bill text, and are included in code revisions.  Ascertain the use and applicability for bill text.  -->
+<!ELEMENT note (text | error | occurred | deflist)*> 
+<!ATTLIST note type (committee | drafter | revisor | general | query) #IMPLIED>
+
+<!ELEMENT error (text)*>
+<!ELEMENT occurred (text)*>
+
+<!ELEMENT citation (text) >
+<!ATTLIST citation type (ACOM | uncodified | PLL | MDConstitution | other) #IMPLIED
+		ref CDATA #IMPLIED>
+<!-- citation model changed to allow for a more simplistic reference:  text only -->
+
+<!ELEMENT session (#PCDATA)>
+<!ATTLIST session type (regular | special) 'regular'
+			number CDATA  #IMPLIED
+			year CDATA #REQUIRED>
+
+<!ELEMENT enum (#PCDATA | added-phrase | deleted-phrase)*>
+<!ATTLIST enum state (changed | unchanged) 'unchanged'
+		value-override	CDATA #IMPLIED >
+
+<!ELEMENT short-title (#PCDATA | %partial-revisions; | local-number)*>
+
+<!ELEMENT local-number (#PCDATA | %partial-revisions;)*>
+<!-- this is one component of a short title when a local bill has been offered and brought into the bill drafting environment -->
+
+<!ELEMENT comment (text)>
+<!ATTLIST comment type (evaluative | substantive | acknowledgement) #REQUIRED>
+<!--  the evaluative comments will be parsed out of the file and retained separately in the database from the document to which they apply.  Other information may be pulled with the comment, such as state of the document when the comment was made, etc.  These comments are for management purposes only. The substantive comments can remain in the document but hidden from view or print  -->
+
+<!-- ***********************************  table elements *********************************  -->
+
+<!ELEMENT table (%tbl.table.mdl;)>
+
+<!ATTLIST %tbl.table.name;  frame  (top|bottom|topbot|all|sides|none) #IMPLIED
+               colsep   %yesorno; #IMPLIED
+   		rowsep   %yesorno; #IMPLIED
+   		protected (yes | no | done) 'yes'
+ 		%tbl.table.att;
+               %bodyatt; >  
+
+<!ELEMENT tgroup (%tbl.tgroup.mdl;)>
+
+<!ATTLIST tgroup  cols     NMTOKEN  #REQUIRED
+                    colsep  %yesorno; #IMPLIED
+                    
+                    rowsep  %yesorno; #IMPLIED
+                    
+                    align  (left | right | center | justify | char )  #IMPLIED
+                    %tbl.tgroup.att;>
+
+<!ELEMENT colspec EMPTY>
+
+<!ATTLIST colspec  colnum      NMTOKEN  #IMPLIED
+                     colname   NMTOKEN  #IMPLIED
+                     colwidth   CDATA    #IMPLIED
+                     colsep     %yesorno;  #IMPLIED
+                      rowsep  %yesorno;  #IMPLIED
+                     align            (left | right | center | justify | char )  #IMPLIED
+                     char            CDATA    #IMPLIED
+                     charoff         NMTOKEN  #IMPLIED
+                     %tbl.colspec.att; >
+
+<!ELEMENT thead (row+)>
+
+<!ATTLIST thead  valign (top | middle | bottom )  #IMPLIED
+                   %tbl.thead.att; >
+
+<!ELEMENT tbody (row+)>
+
+<!ATTLIST tbody  valign (top | middle | bottom )  #IMPLIED
+                   %tbl.tbody.att; >
+<!ELEMENT row (%tbl.row.mdl;)>
+
+<!ATTLIST row  rowsep %yesorno;#IMPLIED
+                 valign       (top | middle | bottom )  #IMPLIED
+                 %tbl.row.att; >
+
+<!ELEMENT entry %tbl.entry.mdl;>
+<!ATTLIST entry  colname       NMTOKEN  #IMPLIED
+                   namest        NMTOKEN  #IMPLIED
+                   nameend       NMTOKEN  #IMPLIED
+                   morerows      NMTOKEN  #IMPLIED
+                   colsep  %yesorno;     #IMPLIED
+                   rowsep  %yesorno;   #IMPLIED
+                   align          (left | right | center | justify | char )  #IMPLIED
+                   char          CDATA    #IMPLIED
+                   charoff       NMTOKEN  #IMPLIED
+                   valign         (top | middle | bottom )  #IMPLIED
+                   protected (yes | no | done) 'yes'
+                   %tbl.entry.att; >
+
+<!--  **********************************************************************************  -->
+
+<!ELEMENT added-phrase (doc-state | authorinfo | enum | text)*>
+<!ATTLIST added-phrase  renum (yes | no) #IMPLIED
+			track-changes (yes | no) #IMPLIED>
+
+<!ELEMENT deleted-phrase (#PCDATA |doc-state | authorinfo | enum | deleted-phrase | added-phrase | citation | fill | emphasis | mga_space)*>
+<!ATTLIST deleted-phrase role (strike|bracket | remove | undo) 'bracket'
+				span (start | stop)  #IMPLIED
+				renum (yes | no) #IMPLIED
+				track-changes (yes | no) #IMPLIED>
+<!-- the role attribute will be used for Third reader and enrolled versions, where either a bracket or striking can be implemented.  By default, it will be bracket.  For an lr or First Reader, it must be bracket. At 3rd read a strike or bracket is allowed for a deletion, however the deletion by strike means to undo the previous deletion. -->
+
+<!ELEMENT action (date?, (action-desc | action-instruction)*)>
+<!ATTLIST action  stage  (enacted | gov-header | bill-resolution-header) 'enacted'>
+
+<!ELEMENT action-desc (#PCDATA)>
+
+<!ELEMENT action-instruction (#PCDATA)>
+
+<!-- ****************************** structural body components **************************** -->
+
+<!ELEMENT section (%section-model;)>
+<!ATTLIST section 	id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+ 		   	changed   (changed | not-changed)  'not-changed'
+			old-id  NMTOKENS #IMPLIED
+			effectDate-begin CDATA #IMPLIED
+			effectDate-end CDATA #IMPLIED
+			contingency (yes | no) 'no'
+			on-what CDATA #IMPLIED
+			protected (yes | no | done) 'yes'>
+
+<!ELEMENT enact-clause (%enact-clause-model;)*>
+<!ATTLIST enact-clause id NMTOKENS #IMPLIED
+			effectDate-begin CDATA #IMPLIED
+			effectDate-end CDATA #IMPLIED
+			contingency (yes | no)  'no'
+			on-what CDATA #IMPLIED
+			changed (changed | not-changed) #IMPLIED
+			old-id  NMTOKENS #IMPLIED>
+
+<!-- the changed attribute is used for database updates only -->
+			
+<!ELEMENT subsection (%subsection-model;)>
+<!ATTLIST subsection 	id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+			changed (changed | not-changed) 'not-changed'
+			role (none | item) 'none'
+			old-id  NMTOKENS #IMPLIED
+			contingency (yes | no) #IMPLIED
+			protected (yes | no | done) 'yes'> 
+
+<!ELEMENT paragraph (%start-of-structure;, %end-of-structure;, (table | add-subparagraph | delete-subparagraph | subparagraph)*)>
+<!ATTLIST paragraph  	id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+			changed (changed | not-changed) 'not-changed'	
+			role (none | item) 'none'
+			old-id  NMTOKENS #IMPLIED
+			contingency (yes | no) #IMPLIED
+			protected (yes | no | done) 'yes'> 
+                   
+<!ELEMENT subparagraph (%start-of-structure;, %end-of-structure;, (table | sub-subparagraph | add-sub-subparagraph | delete-sub-subparagraph)*)>
+<!ATTLIST subparagraph  id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+			changed (changed | not-changed)  'not-changed'	
+			role (none | item) 'none'
+			old-id  NMTOKENS #IMPLIED
+			contingency (yes | no) #IMPLIED
+			protected (yes | no | done) 'yes'> 
+
+<!ELEMENT sub-subparagraph (%start-of-structure;, %end-of-structure;, (table | sub-sub-subparagraph | add-sub-sub-subparagraph | delete-sub-sub-subparagraph)*)>
+<!ATTLIST sub-subparagraph  	id NMTOKENS #IMPLIED
+				db-date CDATA #IMPLIED
+				changed (changed | not-changed)  'not-changed'
+				role (none | item) 'none'
+				old-id  NMTOKENS #IMPLIED
+				contingency (yes | no) #IMPLIED
+				protected (yes | no | done) 'yes'>
+                           
+<!ELEMENT sub-sub-subparagraph (%start-of-structure;, %end-of-structure;, table*)>
+<!ATTLIST sub-sub-subparagraph 	id NMTOKENS #IMPLIED
+				db-date CDATA #IMPLIED
+				changed (changed | not-changed) 'not-changed' 
+				role (none | item) 'none'
+				old-id  NMTOKENS #IMPLIED
+				contingency (yes | no) #IMPLIED
+				protected (yes | no | done) 'yes'>
+			
+<!--  removed the item structures - they are the same as the paragraph family - will attach role attribute for drafters  ex: role='item' -->
+<!-- MGA modified 2/23/2004 to fix the models for divisions through parts.  Need to be able to go from either of those
+	elements to any of those below or directly to a section (add-, delete-, or regular). -->
+
+<!ENTITY % division-model "%start-of-structure; , %end-of-structure;, (title | add-title | delete-title | subtitle | add-subtitle | delete-subtitle | part | add-part | delete-part | section | add-section | delete-section)*">
+
+<!ENTITY % title-model "%start-of-structure;, %end-of-structure;, (subtitle | delete-subtitle | add-subtitle | part | add-part | delete-part | section | add-section | delete-section)*">
+                 
+<!ENTITY % subtitle-model "%start-of-structure;, %end-of-structure;, (add-part | delete-part | part | section | add-section | delete-section)*">
+
+<!ENTITY % chapter-model "%start-of-structure; , %end-of-structure;, (add-clause | delete-clause | section | add-section | delete-section | enact-clause)*">
+
+<!ENTITY % part-model "%start-of-structure; , %end-of-structure;, (section | add-section | delete-section)*">
+
+<!ELEMENT division (%division-model;)>
+<!ATTLIST division      id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+			changed (changed | not-changed)  'not-changed'	
+			old-id  NMTOKENS #IMPLIED
+			contingency (yes | no) #IMPLIED
+			protected (yes | no | done) 'yes'>
+
+<!ELEMENT title (%title-model;)*>
+<!ATTLIST title  	id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+			changed (changed | not-changed) 'not-changed'
+			old-id  NMTOKENS #IMPLIED
+			protected (yes | no | done) 'yes'>
+                   
+<!ELEMENT long-title ((subheading1 | text)*, short-title+, (purpose-paragraph | add-purpose-paragraph | delete-purpose-paragraph)*, (add-function-paragraph | delete-function-paragraph | function-paragraph)*)>
+<!ATTLIST long-title 	changed (changed | not-changed) #IMPLIED>
+<!-- subheading1 holds "A bill entitled", and text holds "An act concerning"  -->
+                  
+<!ELEMENT purpose-paragraph (text)*>
+
+<!ELEMENT function-paragraph (func-line, (article-line | section-line | volume-line | tobe-clause)*)+>
+<!ATTLIST function-paragraph id NMTOKENS #IMPLIED>
+
+<!ELEMENT tobe-clause (text)>
+
+<!ELEMENT func-line  (text)>
+<!ATTLIST func-line  action CDATA #IMPLIED
+		     id NMTOKENS #IMPLIED> 
+
+<!ELEMENT article-line (text)>
+<!ATTLIST article-line name CDATA #IMPLIED
+		       id NMTOKENS #IMPLIED>
+
+<!ELEMENT section-line (text)>
+
+<!ELEMENT volume-line (text)>
+
+<!ELEMENT filecode (#PCDATA)>
+
+<!ELEMENT subtitle (%subtitle-model;)>
+<!ATTLIST subtitle  	id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED	
+			changed (changed | not-changed)  'not-changed'
+			old-id  NMTOKENS #IMPLIED
+			contingency (yes | no) #IMPLIED
+			protected (yes | no | done) 'yes'>
+
+<!ELEMENT chapter (%chapter-model;)>
+<!ATTLIST chapter 	id NMTOKENS #IMPLIED
+			db-date CDATA #IMPLIED
+			changed (changed | not-changed)  'not-changed'
+			contingency (yes | no) #IMPLIED>
+
+<!ELEMENT part (%part-model;)>
+<!ATTLIST part	id NMTOKENS #IMPLIED
+		db-date CDATA #IMPLIED
+		changed (changed | not-changed)  'not-changed'
+		contingency (yes | no) #IMPLIED
+		protected (yes | no | done) 'yes'> 
+
+<!ELEMENT contact-info (name)>
+
+<!ELEMENT name (firstName | surname | otherName)*>
+<!ATTLIST name userid CDATA #IMPLIED
+	       orig-userid CDATA #IMPLIED> 
+
+<!ELEMENT firstName	(#PCDATA)>
+<!ELEMENT surname (#PCDATA)>
+<!ELEMENT otherName	(#PCDATA)>
+
+<!ELEMENT emphasis (#PCDATA)>
+<!ATTLIST emphasis role (italic | bold) 'italic'>
+<!-- the role of italic is the ONLY form of emphasis drafters are allowed to insert  -->
+
+<!-- *****MGA  Added mga_newline to text 9/11/03 ***** -->
+<!ELEMENT mga_newline EMPTY >
+
+<!-- *****MGA Added mga_space to replace the _interword-space use in added and deleted phrases 3/5/2004 ***** -->
+<!ELEMENT mga_space EMPTY >
+<!ATTLIST mga_space override CDATA #IMPLIED
+		    no-space CDATA #IMPLIED>
+
+<!ELEMENT text (#PCDATA | %text-model; | mga_newline | mga_space)* >
+<!ATTLIST text context (bill | amendment | bond | resolution | jointRes) #IMPLIED
+				state (changed | unchanged) 'unchanged'>
