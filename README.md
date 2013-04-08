@@ -1,4 +1,4 @@
 MD-code-xml
 ===========
 
-XML version of the MD Code of Public laws
+Raw XML version of the MD Code of Public laws
